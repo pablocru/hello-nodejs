@@ -6,7 +6,17 @@ const { resolve } = require("path");
  * @param {string} filename
  */
 function createLogPath(filename) {
-  return resolve(__dirname, "../../logs", filename);
+  /*
+    `process.argv[1]` = path of the entrypoint, the file passed as an argument for node:
+
+    ```bash
+    node src/app.js
+    ```
+
+    Using `process.argv[1]` instead of `__dirname` ensures the path is correctly resolved
+    even with relative paths or different working directories.
+  */
+  return resolve(process.argv[1], "../../logs", filename);
 }
 
 const logger = winston.createLogger({
