@@ -2,7 +2,9 @@ const { people } = require("./people.cjs");
 const {
   pokemon: { getPokemonById },
 } = require("./entities/index.cjs");
-const { logger: configureLogger } = require("./plugins/index.cjs");
+const {
+  logger: { configureLogger },
+} = require("./plugins/index.cjs");
 
 const logger = configureLogger("app");
 

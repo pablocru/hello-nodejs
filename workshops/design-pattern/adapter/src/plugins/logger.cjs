@@ -29,7 +29,10 @@ const logger = winston.createLogger({
   ],
 });
 
-module.exports = function configureLogger(service) {
+/**
+ * @param {string} service
+ */
+function configureLogger(service) {
   return {
     log: (message) => {
       logger.log("info", message, { service });
@@ -38,4 +41,6 @@ module.exports = function configureLogger(service) {
       logger.log("error", message, { service });
     },
   };
-};
+}
+
+module.exports = { configureLogger };
