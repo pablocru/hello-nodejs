@@ -1,9 +1,10 @@
-const { getIdentifier } = require("./plugins/identifier.cjs");
 const {
-  getYearDiffInNumber,
-  getLongDateFromString,
-} = require("./plugins/date.cjs");
-const { configureMakePerson } = require("./entities/person.cjs");
+  person: { configureMakePerson },
+} = require("./entities/index.cjs");
+const {
+  date: { getLongDateFromString, getYearDiffInNumber },
+  identifier: { getIdentifier },
+} = require("./plugins/index.cjs");
 
 // Dependency injection
 const makePerson = configureMakePerson(
