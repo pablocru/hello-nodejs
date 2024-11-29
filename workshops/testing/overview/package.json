@@ -1,0 +1,28 @@
+{
+  "name": "@hello-nodejs/testing-overview",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node dist/app.js",
+    "start:watch": "node --watch dist/app.js",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "npm-run-all2 -s build -p build:watch start:watch --race --print-label",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "@hello-nodejs/design-pattern-adapter": "file:../../design-pattern/adapter"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.1",
+    "jest": "^29.7.0",
+    "npm-run-all2": "^7.0.1",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -2,6 +2,10 @@
   "name": "@hello-nodejs/design-pattern-adapter",
   "version": "0.0.1",
   "private": true,
+  "exports": {
+    "./entities": "./src/entities/index.cjs",
+    "./plugins": "./src/plugins/index.cjs"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.cjs",
