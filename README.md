@@ -1,7 +1,9 @@
 # Hello Node.js
 
-Welcome to my Node.js Learning Path! Here you can find a series of workshops and exercises
-that I accomplish while learning `Node.js`.
+Welcome to my Node.js Learning Path! This repository contains workshops, exercises, and
+code snippets I’ve created while learning `Node.js`. It serves as a personal sandbox where
+I improve my skills and track progress, but you’re welcome to explore, try out the code,
+and even contribute!
 
 ## Contribute
 
