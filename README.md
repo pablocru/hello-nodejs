@@ -8,4 +8,5 @@ and even contribute!
 ## Contribute
 
 If you notice any mistakes or have suggestions, I’m all ears! I appreciate any feedback so
-don't hesitate to [open an Issue on GitHub](https://github.com/pablocru/hello-nodejs/issues).
+don't hesitate to [open an Issue on
+GitHub](https://github.com/pablocru/hello-nodejs/issues).
