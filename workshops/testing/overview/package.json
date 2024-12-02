@@ -9,8 +9,7 @@
     "build:watch": "tsc --watch",
     "dev": "npm-run-all2 -s build -p build:watch start:watch --race --print-label",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@hello-nodejs/design-pattern-adapter": "file:../../design-pattern/adapter"
