@@ -1,4 +1,4 @@
-name: Test workshops that has testing steps
+name: Run test on workshops that include testing steps
 
 on:
   workflow_dispatch:
