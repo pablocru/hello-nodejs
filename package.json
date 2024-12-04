@@ -7,7 +7,8 @@
   ],
   "scripts": {
     "lint": "eslint",
-    "test": "npm run test --workspaces --if-present"
+    "test": "npm run test --workspaces --if-present",
+    "test:verbose": "npm run test:verbose --workspaces --if-present"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
