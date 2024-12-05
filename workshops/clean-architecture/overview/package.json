@@ -2,6 +2,13 @@
   "name": "@hello-nodejs/clean-architecture-overview",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "ts-node src/app.ts -b=7 -l=5 -d=table-7",
+    "start:show": "run-s \"start -- -s\"",
+    "clear": "rimraf output",
+    "clear:start": "run-s clear start",
+    "clear:start:show": "run-s clear start:show"
+  },
   "devDependencies": {
     "@types/node": "^22.10.1",
     "npm-run-all2": "^7.0.1",
