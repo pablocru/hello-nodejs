@@ -1,0 +1,15 @@
+{
+  "name": "@hello-nodejs/clean-architecture-overview",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "npm-run-all2": "^7.0.1",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
+}

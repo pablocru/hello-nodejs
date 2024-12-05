@@ -1,0 +1,45 @@
+{
+  "include": [
+    "src/**/*"
+  ],
+  "compilerOptions": {
+    /* Language and Environment */
+    // Set the JavaScript language version for emitted JavaScript and include compatible
+    // library declarations.
+    "target": "es2016",
+
+    /* Modules */
+    // Specify what module code is generated.
+    "module": "commonjs",
+    // Specify the root folder within your source files.
+    "rootDir": "src",
+
+    /* JavaScript Support */
+    // Allow JavaScript files to be a part of your program. Use the 'checkJS' option to
+    // get errors from these files.
+    "allowJs": true,
+    // Enable error reporting in type-checked JavaScript files.
+    "checkJs": true,
+
+    /* Emit */
+    // Generate .d.ts files from TypeScript and JavaScript files in your project.
+    "declaration": true,
+    // Specify an output folder for all emitted files.
+    "outDir": "dist/",
+
+    /* Interop Constraints */
+    // Emit additional JavaScript to ease support for importing CommonJS modules. This
+    // enables 'allowSyntheticDefaultImports' for type compatibility.
+    "esModuleInterop": true,
+    // Ensure that casing is correct in imports.
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    // Enable all strict type-checking options.
+    "strict": true,
+
+    /* Completeness */
+    // Skip type checking all .d.ts files.
+    "skipLibCheck": true
+  }
+}
