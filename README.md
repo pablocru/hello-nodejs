@@ -1,9 +1,10 @@
 # Hello Node.js
 
-Welcome to my Node.js Learning Path! This repository contains workshops, exercises, and
-code snippets I’ve created while learning `Node.js`. It serves as a personal sandbox where
-I improve my skills and track progress, but you’re welcome to explore, try out the code,
-and even contribute!
+Welcome to my Node.js Learning Path! This repository contains workshops that are part of
+the [NodeJS: De cero a experto](https://www.udemy.com/course/nodejs-de-cero-a-experto/)
+course on Udemy by Fernando Herrera. It serves as a personal sandbox where I improve my
+skills and track progress, but you’re welcome to explore, try out the code, and even
+contribute!
 
 ## Contribute
 
