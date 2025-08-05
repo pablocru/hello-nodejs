@@ -4,6 +4,7 @@ import http from "http";
 const htmlContentType = { "Content-Type": "text/html" };
 const cssContentType = { "Content-Type": "text/css" };
 const jsContentType = { "Content-Type": "application/javascript" };
+const textContentType = { "Content-Type": "text/plain" };
 
 type HTTPResponse = http.ServerResponse<http.IncomingMessage>;
 
@@ -30,22 +31,17 @@ function staticFileResponse(
 const server = http.createServer((request, response) => {
   console.log(request.url);
 
-  switch (request.url) {
-    case "/": {
-      staticFileResponse("./public/index.html", htmlContentType, response);
-      break;
-    }
-    case "/style/main.css": {
-      staticFileResponse("./public/style/main.css", cssContentType, response);
-      break;
-    }
-    case "/js/main.js": {
-      staticFileResponse("./public/js/main.js", jsContentType, response);
-      break;
-    }
-    default:
-      response.writeHead(404, htmlContentType).end();
+  if (request.url === "/") {
+    staticFileResponse("./public/index.html", htmlContentType, response);
+    return;
   }
+
+  const contentType = request.url?.endsWith(".css")
+    ? cssContentType
+    : request.url?.endsWith(".js")
+    ? jsContentType
+    : textContentType;
+  staticFileResponse(`./public${request.url}`, contentType, response);
 });
 
 server.listen(8080, () => {
