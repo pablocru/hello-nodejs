@@ -1,12 +1,32 @@
 import fs from "fs";
 import http from "http";
 
-const htmlContentType = { "Content-Type": "text/html" };
-const cssContentType = { "Content-Type": "text/css" };
-const jsContentType = { "Content-Type": "application/javascript" };
-const textContentType = { "Content-Type": "text/plain" };
-
 type HTTPResponse = http.ServerResponse<http.IncomingMessage>;
+
+enum FileExtension {
+  HTML = "html",
+  CSS = "css",
+  JS = "js",
+  TEXT = "text",
+}
+
+type ContentTypeMap = Record<FileExtension, string>;
+
+function getContentType(fileExtension: FileExtension) {
+  const contentTypeMap: ContentTypeMap = {
+    [FileExtension.HTML]: "text/html",
+    [FileExtension.CSS]: "text/css",
+    [FileExtension.JS]: "application/javascript",
+    [FileExtension.TEXT]: "text/plain",
+  };
+
+  return { "Content-Type": contentTypeMap[fileExtension] };
+}
+
+const htmlContentType = getContentType(FileExtension.HTML);
+const cssContentType = getContentType(FileExtension.CSS);
+const jsContentType = getContentType(FileExtension.JS);
+const textContentType = getContentType(FileExtension.TEXT);
 
 function internalErrorResponse(response: HTTPResponse) {
   response
