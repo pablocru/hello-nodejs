@@ -5,12 +5,26 @@ const htmlContentType = { "Content-Type": "text/html" };
 const cssContentType = { "Content-Type": "text/css" };
 const jsContentType = { "Content-Type": "application/javascript" };
 
-function internalErrorResponse(
-  response: http.ServerResponse<http.IncomingMessage>
-) {
+type HTTPResponse = http.ServerResponse<http.IncomingMessage>;
+
+function internalErrorResponse(response: HTTPResponse) {
   response
     .writeHead(500, htmlContentType)
     .end("<h1>Internal Server Error</h1>");
+}
+
+function staticFileResponse(
+  staticFile: string,
+  contentType: { "Content-Type": string },
+  response: HTTPResponse
+) {
+  fs.readFile(staticFile, (err, readFile) => {
+    if (err) {
+      internalErrorResponse(response);
+      return;
+    }
+    response.writeHead(200, contentType).end(readFile);
+  });
 }
 
 const server = http.createServer((request, response) => {
@@ -18,33 +32,15 @@ const server = http.createServer((request, response) => {
 
   switch (request.url) {
     case "/": {
-      fs.readFile("./public/index.html", (err, readFile) => {
-        if (err) {
-          internalErrorResponse(response);
-          return;
-        }
-        response.writeHead(200, htmlContentType).end(readFile);
-      });
+      staticFileResponse("./public/index.html", htmlContentType, response);
       break;
     }
     case "/style/main.css": {
-      fs.readFile("./public/style/main.css", (err, readFile) => {
-        if (err) {
-          internalErrorResponse(response);
-          return;
-        }
-        response.writeHead(200, cssContentType).end(readFile);
-      });
+      staticFileResponse("./public/style/main.css", cssContentType, response);
       break;
     }
     case "/js/main.js": {
-      fs.readFile("./public/js/main.js", (err, readFile) => {
-        if (err) {
-          internalErrorResponse(response);
-          return;
-        }
-        response.writeHead(200, jsContentType).end(readFile);
-      });
+      staticFileResponse("./public/js/main.js", jsContentType, response);
       break;
     }
     default:
