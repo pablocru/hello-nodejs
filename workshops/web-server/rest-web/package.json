@@ -1,0 +1,21 @@
+{
+  "name": "rest-web",
+  "version": "0.0.1",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev":"tsnd --respawn --clear src/app.ts",
+    "clear":"rimraf dist",
+    "build": "tsc",
+    "build:clear": "run-s clear build",
+    "start": "node dist/app.js",
+    "start:clean": "run-s build:clear start"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.0",
+    "npm-run-all2": "^8.0.4",
+    "rimraf": "^6.0.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  }
+}
