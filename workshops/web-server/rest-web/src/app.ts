@@ -8,8 +8,15 @@ const server = http.createServer((request, response) => {
 
   switch (request.url) {
     case "/": {
-      const htmlFile = fs.readFileSync("./public/index.html");
-      response.writeHead(200, htmlContentType).end(htmlFile);
+      fs.readFile("./public/index.html", (err, htmlFile) => {
+        if (err) {
+          response
+            .writeHead(500, htmlContentType)
+            .end("<h1>Internal Server Error</h1>");
+          return;
+        }
+        response.writeHead(200, htmlContentType).end(htmlFile);
+      });
       break;
     }
     default:
