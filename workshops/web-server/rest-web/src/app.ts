@@ -5,6 +5,14 @@ const htmlContentType = { "Content-Type": "text/html" };
 const cssContentType = { "Content-Type": "text/css" };
 const jsContentType = { "Content-Type": "application/javascript" };
 
+function internalErrorResponse(
+  response: http.ServerResponse<http.IncomingMessage>
+) {
+  response
+    .writeHead(500, htmlContentType)
+    .end("<h1>Internal Server Error</h1>");
+}
+
 const server = http.createServer((request, response) => {
   console.log(request.url);
 
@@ -12,9 +20,7 @@ const server = http.createServer((request, response) => {
     case "/": {
       fs.readFile("./public/index.html", (err, readFile) => {
         if (err) {
-          response
-            .writeHead(500, htmlContentType)
-            .end("<h1>Internal Server Error</h1>");
+          internalErrorResponse(response);
           return;
         }
         response.writeHead(200, htmlContentType).end(readFile);
@@ -24,9 +30,7 @@ const server = http.createServer((request, response) => {
     case "/style/main.css": {
       fs.readFile("./public/style/main.css", (err, readFile) => {
         if (err) {
-          response
-            .writeHead(500, htmlContentType)
-            .end("<h1>Internal Server Error</h1>");
+          internalErrorResponse(response);
           return;
         }
         response.writeHead(200, cssContentType).end(readFile);
@@ -36,9 +40,7 @@ const server = http.createServer((request, response) => {
     case "/js/main.js": {
       fs.readFile("./public/js/main.js", (err, readFile) => {
         if (err) {
-          response
-            .writeHead(500, htmlContentType)
-            .end("<h1>Internal Server Error</h1>");
+          internalErrorResponse(response);
           return;
         }
         response.writeHead(200, jsContentType).end(readFile);
