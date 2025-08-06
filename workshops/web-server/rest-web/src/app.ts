@@ -1,7 +1,7 @@
 import fs from "fs";
-import http from "http";
+import http2 from "http2";
 
-type HTTPResponse = http.ServerResponse<http.IncomingMessage>;
+type HTTPResponse = http2.Http2ServerResponse<http2.Http2ServerRequest>;
 
 enum FileExtension {
   HTML = "html",
@@ -48,21 +48,27 @@ function staticFileResponse(
   });
 }
 
-const server = http.createServer((request, response) => {
-  console.log(request.url);
+const server = http2.createSecureServer(
+  {
+    key: fs.readFileSync("./certificates/server.key"),
+    cert: fs.readFileSync("./certificates/server.crt"),
+  },
+  (request, response) => {
+    console.log(request.url);
 
-  if (request.url === "/") {
-    staticFileResponse("./public/index.html", htmlContentType, response);
-    return;
+    if (request.url === "/") {
+      staticFileResponse("./public/index.html", htmlContentType, response);
+      return;
+    }
+
+    const contentType = request.url?.endsWith(".css")
+      ? cssContentType
+      : request.url?.endsWith(".js")
+      ? jsContentType
+      : textContentType;
+    staticFileResponse(`./public${request.url}`, contentType, response);
   }
-
-  const contentType = request.url?.endsWith(".css")
-    ? cssContentType
-    : request.url?.endsWith(".js")
-    ? jsContentType
-    : textContentType;
-  staticFileResponse(`./public${request.url}`, contentType, response);
-});
+);
 
 server.listen(8080, () => {
   console.log("Server running on port 8080");
