@@ -10,3 +10,6 @@ logs/
 
 # Environment variables
 .env*
+
+# OpenSSL Certificate Folder
+**/certificates/
