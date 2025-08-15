@@ -8,6 +8,7 @@ enum FileExtension {
   CSS = "css",
   JS = "js",
   TEXT = "text",
+  ICON = "icon",
 }
 
 type ContentTypeMap = Record<FileExtension, string>;
@@ -18,6 +19,7 @@ function getContentType(fileExtension: FileExtension) {
     [FileExtension.CSS]: "text/css",
     [FileExtension.JS]: "application/javascript",
     [FileExtension.TEXT]: "text/plain",
+    [FileExtension.ICON]: "image/x-icon",
   };
 
   return { "Content-Type": contentTypeMap[fileExtension] };
@@ -27,6 +29,7 @@ const htmlContentType = getContentType(FileExtension.HTML);
 const cssContentType = getContentType(FileExtension.CSS);
 const jsContentType = getContentType(FileExtension.JS);
 const textContentType = getContentType(FileExtension.TEXT);
+const iconContentType = getContentType(FileExtension.ICON);
 
 function internalErrorResponse(response: HTTPResponse) {
   response
@@ -65,6 +68,8 @@ const server = http2.createSecureServer(
       ? cssContentType
       : request.url?.endsWith(".js")
       ? jsContentType
+      : request.url?.endsWith(".ico")
+      ? iconContentType
       : textContentType;
     staticFileResponse(`./public${request.url}`, contentType, response);
   }
