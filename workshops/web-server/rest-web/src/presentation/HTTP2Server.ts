@@ -1,30 +1,15 @@
 import fs from "fs";
 import http2, { Http2SecureServer } from "http2";
-import { RestServer } from "./RestServer";
+import { ContentType, RestServer } from "./RestServer";
 
 type HTTPResponse = http2.Http2ServerResponse<http2.Http2ServerRequest>;
 
-enum FileExtension {
-  HTML = "html",
-  CSS = "css",
-  JS = "js",
-  TEXT = "text",
-  ICON = "icon",
-}
-
-type ContentTypeMap = Record<FileExtension, string>;
-
-type ContentType = Record<"Content-Type", string>;
-
-export class HTTP2Server implements RestServer {
+export class HTTP2Server extends RestServer {
   private server: Http2SecureServer | null = null;
-  private htmlContentType = this.getContentType(FileExtension.HTML);
-  private cssContentType = this.getContentType(FileExtension.CSS);
-  private jsContentType = this.getContentType(FileExtension.JS);
-  private textContentType = this.getContentType(FileExtension.TEXT);
-  private iconContentType = this.getContentType(FileExtension.ICON);
 
   constructor() {
+    super();
+
     this.server = http2.createSecureServer(
       {
         key: fs.readFileSync("./certificates/server.key"),
@@ -42,13 +27,7 @@ export class HTTP2Server implements RestServer {
           return;
         }
 
-        const contentType = request.url?.endsWith(".css")
-          ? this.cssContentType
-          : request.url?.endsWith(".js")
-          ? this.jsContentType
-          : request.url?.endsWith(".ico")
-          ? this.iconContentType
-          : this.textContentType;
+        const contentType = this.getContentTypeHeader(request.url);
 
         this.staticFileResponse(
           `./public${request.url}`,
@@ -83,17 +62,5 @@ export class HTTP2Server implements RestServer {
       }
       response.writeHead(200, contentType).end(readFile);
     });
-  }
-
-  private getContentType(fileExtension: FileExtension) {
-    const contentTypeMap: ContentTypeMap = {
-      [FileExtension.HTML]: "text/html",
-      [FileExtension.CSS]: "text/css",
-      [FileExtension.JS]: "application/javascript",
-      [FileExtension.TEXT]: "text/plain",
-      [FileExtension.ICON]: "image/x-icon",
-    };
-
-    return { "Content-Type": contentTypeMap[fileExtension] };
   }
 }
