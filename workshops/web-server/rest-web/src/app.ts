@@ -1,4 +1,4 @@
-import { HTTP2Server } from "./presentation/HTTP2Server";
+import { HTTPServer } from "./presentation/HTTPServer";
 
-const http2Server = new HTTP2Server();
-http2Server.start(8080);
+const server = new HTTPServer();
+server.start(8080);
